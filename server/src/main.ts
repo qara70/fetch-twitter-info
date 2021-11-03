@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { Module } from '@nestjs/common';
-import { TwitterController } from './twitter/twitter.controller';
-import { TwitterService } from './twitter/twitter.service';
+import { TwitterController } from './presentation/controller/twitter.controller';
+import { TwitterService } from './application/service/twitter.service';
 
 @Module({
   imports: [],

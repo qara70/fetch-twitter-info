@@ -1,6 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TwitterController } from './twitter.controller';
-import { TwitterService } from './twitter.service';
+import { TwitterController } from '../twitter.controller';
+import { TwitterService } from '../../../application/service/twitter.service';
 
 describe('TwitterController', () => {
   let controller: TwitterController;
