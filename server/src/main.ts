@@ -1,12 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { Module } from '@nestjs/common';
-import { TwitterController } from './presentation/controller/twitter.controller';
-import { TwitterService } from './application/service/twitter.service';
+import { ConfigModule } from '@nestjs/config';
+import { TwitterModule } from './nest-module/twitter.module';
 
 @Module({
-  imports: [],
-  controllers: [TwitterController],
-  providers: [TwitterService],
+  imports: [
+    TwitterModule,
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+      isGlobal: true,
+    }),
+  ],
+  controllers: [],
+  providers: [],
 })
 export class Modules {}
 
