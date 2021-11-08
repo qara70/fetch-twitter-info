@@ -5,7 +5,7 @@ import { HttpModuleOptions } from '@nestjs/common';
 export class HttpConfigService implements HttpModuleOptionsFactory {
   createHttpOptions(): HttpModuleOptions {
     return {
-      baseURL: process.env.Twitter_API_Base_Url,
+      baseURL: `${process.env.Twitter_API_Base_Url}`,
       timeout: 5000,
       headers: {
         'Content-Type': 'application/json',
