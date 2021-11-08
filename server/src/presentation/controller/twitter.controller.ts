@@ -1,22 +1,17 @@
-import { Controller, Get, Param, Delete } from '@nestjs/common';
-import { TwitterService } from '../../application/service/twitter.service';
+import { Controller, Get, Query } from '@nestjs/common';
+import {
+  IFindTweetedUsersUsecase,
+  IFindTweetedUsersUsecaseQuery,
+} from 'src/application/usecase/find-tweeted-users/find-tweeted-users-usecase';
 
 @Controller('twitter')
 export class TwitterController {
-  constructor(private readonly twitterService: TwitterService) {}
+  constructor(
+    private readonly findTweetedUsersUsecase: IFindTweetedUsersUsecase,
+  ) {}
 
   @Get()
-  findAll() {
-    return this.twitterService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.twitterService.findOne(+id);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.twitterService.remove(+id);
+  getTweetedUsers(@Query() query: IFindTweetedUsersUsecaseQuery) {
+    return this.findTweetedUsersUsecase.exec(query);
   }
 }
