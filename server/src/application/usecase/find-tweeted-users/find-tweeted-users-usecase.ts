@@ -105,7 +105,7 @@ export class FindTweetedUsersUsecase implements IFindTweetedUsersUsecase {
       : '';
     query.max_results
       ? (constructedQuery += `&max_results=${query['max_results']}`)
-      : '';
+      : (constructedQuery += '&max_results=100');
     query.expansions
       ? (constructedQuery += `&expansions=author_id,${query['expansions']}`)
       : (constructedQuery += '&expansions=author_id');
