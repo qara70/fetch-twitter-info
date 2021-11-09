@@ -17,8 +17,8 @@ export class TwitterController {
     return this.findTweetedUsersUsecase.exec(query);
   }
 
-  @Get('follow/user/:username')
-  getFollowUsers(@Param('username') username: string) {
-    return this.findFollowUsersUsecase.exec(username);
+  @Get('follow/user/:id')
+  getFollowUsers(@Param('id') id: number | bigint) {
+    return this.findFollowUsersUsecase.exec(id);
   }
 }
