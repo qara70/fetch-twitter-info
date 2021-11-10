@@ -2,8 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 
 export interface IFindTweetedUsersUsecase {
-  exec(query: IFindTweetedUsersUsecaseQuery);
-  getTweetedUsers(query: IFindTweetedUsersUsecaseQuery);
+  exec(query: IFindTweetedUsersUsecaseQuery): Promise<IFindTweetedUser[]>;
+  getTweetedUsers(
+    query: IFindTweetedUsersUsecaseQuery,
+  ): Promise<GetTweetedUsersResponse>;
 }
 
 export type IFindTweetedUsersUsecaseQuery = {
@@ -45,7 +47,9 @@ export interface GetTweetedUsersResponse {
 export class FindTweetedUsersUsecase implements IFindTweetedUsersUsecase {
   public constructor(private readonly httpService: HttpService) {}
 
-  public async exec(query: IFindTweetedUsersUsecaseQuery): Promise<any> {
+  public async exec(
+    query: IFindTweetedUsersUsecaseQuery,
+  ): Promise<IFindTweetedUser[]> {
     const tweetedUsers = await this.getTweetedUsers(query);
     return this.build(tweetedUsers);
   }

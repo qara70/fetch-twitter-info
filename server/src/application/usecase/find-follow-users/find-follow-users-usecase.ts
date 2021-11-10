@@ -2,18 +2,34 @@ import { Injectable } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
 
 export interface IFindFollowUsersUsecase {
-  exec(id: number | bigint);
-  getFollowUsers(id: number | bigint);
+  exec(id: number | bigint): Promise<IFindFollowUsers[]>;
+  getFollowUsers(id: number | bigint): Promise<IGetFollowUsers>;
 }
+
+export interface IGetFollowUsers {
+  data: {
+    id: string;
+    name: string;
+    username: string;
+  }[];
+}
+
+export interface IFindFollowUsers {
+  id: string;
+  name: string;
+  username: string;
+}
+[];
 
 @Injectable()
 export class FindFollowUsersUsecase implements IFindFollowUsersUsecase {
   public constructor(private readonly httpService: HttpService) {}
-  public exec(id: number | bigint) {
-    return this.getFollowUsers(id);
+  public async exec(id: number | bigint): Promise<IFindFollowUsers[]> {
+    const followers = await this.getFollowUsers(id);
+    return followers.data;
   }
 
-  public async getFollowUsers(id: number | bigint) {
+  public async getFollowUsers(id: number | bigint): Promise<IGetFollowUsers> {
     try {
       const response = await this.httpService
         .get(
