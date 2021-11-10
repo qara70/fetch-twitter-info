@@ -22,14 +22,15 @@ describe('FindTweetedUsersUsecase', () => {
   });
 
   describe('正常系', () => {
-    it('getUsers()でユーザー情報が取得できる', async () => {
-      console.log('getFollowers');
-      console.log(
-        await findTweetedUsersUsecase.exec({
-          query: 'DDD',
-          expansions: '',
-        }),
-      );
+    it('exec()でユーザー情報が100件取得できる', async () => {
+      expect(
+        (
+          await findTweetedUsersUsecase.exec({
+            query: 'DDD',
+            expansions: '',
+          })
+        ).length,
+      ).toBeLessThan(100);
     });
   });
 });
